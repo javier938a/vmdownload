@@ -1,0 +1,107 @@
+#incluyendo el archivo kv
+#:include resources/recursos.kv
+
+<VentanaInicial>:#creando la vista de la ventana principal
+    id:view_pricipal
+    orientation:"vertical"
+    MDTopAppBar:
+        title:'Decarga de Videos y Musica'
+    MDTabs:#creando un contenedor de pestanias
+        Tab:#agregando una pestania que es la de descarga
+            title:'Descargas'#agreando el titulo
+            icon:'account-arrow-down'#agregando el icono
+            size_hint:1,1
+            MDBoxLayout:#aqui solo iria el titulo de escriba el enlaze del video
+                size_hint:(1, None)
+                height:dp(25)
+                MDLabel:
+                    markup:True
+                    text:'[b]Escriba el enlaze de Descarga[/b]'
+                    halign:"center"
+            MDBoxLayout:#ese seria un contenedor que serviria solo para colocar el campo de url
+                orientation:"horizontal"
+                size_hint:(1, None)
+                MDLabel:
+                    size_hint:None, None
+                    width:"40dp"
+                    height:"40dp"
+                    text:'URL:'
+                MDBoxLayout:
+                    id:contenedor_url
+                    orientation:'vertical'
+                    MDFloatLayout:
+                        id:show_copypaste
+                        MDTextFieldRect:
+                            id:txt_url
+                            size_hint:1, None
+                            height:300
+                            pos:contenedor_url.pos
+                            on_focus:
+                                view_pricipal.on_seleccionar_cursor(self.pos)
+                            height:"30dp"
+                            background_color:app.theme_cls.bg_normal
+                MDBoxLayout:
+                    size_hint:None, None
+                    width:145
+            #agregando el otro campo donde se pegaria y se mostraria la url en donde se alacenaria la ruta en donde guardar
+            MDBoxLayout:
+                orientation:'horizontal'
+                size_hint:1, None
+                height:50
+                MDLabel:
+                    text:'Ruta'
+                    halign:'center'
+                    size_hint:None, None
+                    width:'40dp'
+                    height:'40dp'
+                MDBoxLayout:
+                    id:contenedor_ruta
+                    orientation:'vertical'
+                    MDFloatLayout:
+                        id:show_copypaste2
+                        MDTextFieldRect:
+                            id:txt_ruta
+                            size_hint:1,None
+                            height:300,
+                            pos:contenedor_ruta.pos
+                            height:"30dp"
+                            background_color:app.theme_cls.bg_normal
+                            on_focus:
+                                view_pricipal.on_seleccionar_cursor_copypaste_ruta(self.pos)
+                MDRoundFlatIconButton:
+                    id:btn_listar_directorios
+                    size_hint:None, None
+                    width:200
+                    icon:'folder'
+                    text:'Abrir directorios'
+                    on_release:
+                        view_pricipal.abrir_manejador_ruta()
+            MDBoxLayout:
+                size_hint:(1, None)
+                height:50
+                MDRoundFlatIconButton:
+                    id:btn_descargar
+                    size_hint:1, None
+                    icon:'download'
+                    text:'Descargar'
+
+            MDBoxLayout:#aqui se mostraran las descargas de video o Musica
+                orientation:'vertical'
+                MDScrollView:
+                    MDList:
+                        id:list_descargas
+
+
+
+
+<ItemDescarga>:
+    MDBoxLayout:
+        size:self.parent.size
+        pos:self.parent.pos
+        id:iten_descarga_download
+        MDProgressBar:
+            id:progres_download
+            max:100
+
+<Tab>:
+    orientation: 'vertical'
