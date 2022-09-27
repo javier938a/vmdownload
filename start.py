@@ -15,7 +15,7 @@ import clipboard as cop #biblioteca para copiar y pegar
 from recursos import  ContenedorRigidoDescargas
 from kivymd.uix.list import OneLineListItem
 from recursos import HiloDescargador
-
+from kivy.properties import ObjectProperty, ListProperty
 from recursos import CopyPasteUrl
 
 
@@ -55,6 +55,8 @@ class MyLogger(object):
 class VentanaInicial(MDBoxLayout):
     cuenta_item=0
     icons=list(md_icons.keys())[15:30]
+    hilodescarga=ObjectProperty(None)
+    lista_de_hilos=[]
 
     def __init__(self):
         super(VentanaInicial, self).__init__()
@@ -153,6 +155,7 @@ class VentanaInicial(MDBoxLayout):
         contenedor_descarga=self.ids.list_descargas
         url=self.ids.txt_url.text
         ruta=self.ids.txt_ruta.text
+
         key_des=0
         descarga_item_list=ItemDescarga()
         item=[descarga_item_list, descarga_item_list.ids.progres_download]
@@ -166,10 +169,13 @@ class VentanaInicial(MDBoxLayout):
 
 
 
+
+
+
+
+
 class ItemDescarga(OneLineListItem):
     pass
-
-
 
 
 

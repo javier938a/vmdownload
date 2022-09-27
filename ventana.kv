@@ -95,13 +95,39 @@
 
 
 <ItemDescarga>:
+    id:item_descarga
     MDBoxLayout:
+        orientation:'vertical'
         size:self.parent.size
         pos:self.parent.pos
         id:iten_descarga_download
-        MDProgressBar:
-            id:progres_download
-            max:100
+        MDLabel:
+            id:lbl_porcentaje
+            text:''
+        MDLabel:
+            markup:True
+            id:lbl_ubicacion
+            text:''
+        MDBoxLayout:
+            orientation:'horizontal'
+            size:self.parent.size
+            pos:self.parent.pos
+            MDProgressBar:
+                id:progres_download
+                max:100
+            MDRectangleFlatIconButton:
+                id:btn_cancel_descarga
+                icon:'stop'
+                text:'Cancelar'
+                theme_text_color:"Custom"
+                text_color:"red"
+                line_color:'red'
+                theme_icon_color:"Custom"
+                icon_color:"orange"
+
+
+
+
 
 <Tab>:
     orientation: 'vertical'
