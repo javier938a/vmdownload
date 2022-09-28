@@ -1,6 +1,10 @@
 #incluyendo el archivo kv
 #:include resources/recursos.kv
 
+<IconListItem>
+    IconLeftWidget:
+        icon:"music"
+
 <VentanaInicial>:#creando la vista de la ventana principal
     id:view_pricipal
     orientation:"vertical"
@@ -40,9 +44,28 @@
                                 view_pricipal.on_seleccionar_cursor(self.pos)
                             height:"30dp"
                             background_color:app.theme_cls.bg_normal
-                MDBoxLayout:
-                    size_hint:None, None
-                    width:145
+            MDBoxLayout:
+                orientation:'horizontal'
+                size_hint:1, None
+                height:50
+                id:list_formatos_content
+                MDLabel:#labels que serviran para alinear el boton mas al centro
+                    size_hint:None,1
+                    width:50
+                MDRoundFlatIconButton:
+                    icon:'tools'
+                    text:'Formato'
+                    id:btn_formato_convertir
+                    on_release:
+                        view_pricipal.menu_format.open()
+                MDLabel:#label separador del boton con el boton
+                    size_hint:None, 1
+                    width:20
+                MDLabel:
+                    id:lbl_muestra_format
+                    text:''
+
+
             #agregando el otro campo donde se pegaria y se mostraria la url en donde se alacenaria la ruta en donde guardar
             MDBoxLayout:
                 orientation:'horizontal'
@@ -68,9 +91,12 @@
                             background_color:app.theme_cls.bg_normal
                             on_focus:
                                 view_pricipal.on_seleccionar_cursor_copypaste_ruta(self.pos)
+            MDBoxLayout:
+                size_hint:1,None
+                height:50
                 MDRoundFlatIconButton:
                     id:btn_listar_directorios
-                    size_hint:None, None
+                    size_hint:1, None
                     width:200
                     icon:'folder'
                     text:'Abrir directorios'
@@ -115,15 +141,6 @@
             MDProgressBar:
                 id:progres_download
                 max:100
-            MDRectangleFlatIconButton:
-                id:btn_cancel_descarga
-                icon:'stop'
-                text:'Cancelar'
-                theme_text_color:"Custom"
-                text_color:"red"
-                line_color:'red'
-                theme_icon_color:"Custom"
-                icon_color:"orange"
 
 
 
